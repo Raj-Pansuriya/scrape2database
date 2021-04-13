@@ -8,18 +8,18 @@ def display_all(table):
     if(table=="module_list"):
         c.execute(
         """
-            SELECT "index",module FROM {}
+            SELECT module FROM {}
             """.format(table)
         )
-        return c.fetchall()
+        return [i[0] for i in c.fetchall()]
     else:
         try:
             c.execute(
                 """
-                SELECT "index",function_name FROM {}
+                SELECT function_name FROM {}
                 """.format(table)
             )
-            return c.fetchall()
+            return [i[0] for i in c.fetchall()]
         except:
             pass
 
@@ -27,18 +27,18 @@ def get_by_name(name,table):
     if(table=="module_list"):
         c.execute(
             """
-            SELECT module,source_code FROM {} WHERE module={}
-            """.format(table,name)
+            SELECT module,source_code FROM module_list WHERE module=:module
+            """,{'module':name}
         )
         return c.fetchall()
     else:
         try:
             c.execute(
-                """
-                SELECT function_name,function_usage FROM {} WHERE function_name={}
-                """.format(table,name)
+                f"""
+                SELECT function_usage FROM {table} WHERE function_name =:function_name
+                """,{'function_name':name}
             )
-            return c.fetchall()
+            return c.fetchall()[0][0]
         except:
             return "No such function found in the database"
 
@@ -58,7 +58,7 @@ def get_by_index(index,table):
         try:
             c.execute(
                 """
-                SELECT function_name,function_usage FROM {} WHERE "index"={}
+                SELECT function_usage FROM {} WHERE "index"={}
                 """.format(table,index)
             )
         except:
