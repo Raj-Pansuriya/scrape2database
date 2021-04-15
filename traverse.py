@@ -39,6 +39,6 @@ def get_by_name(name,table):
                 SELECT function_usage FROM {table} WHERE function_name =:function_name
                 """,{'function_name':name}
             )
-            return textwrap.fill(c.fetchall()[0][0],20)
+            return textwrap.fill(c.fetchall()[0][0],70)
         except:
             return "No such function found in the database"
