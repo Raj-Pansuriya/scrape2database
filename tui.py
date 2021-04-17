@@ -1,6 +1,10 @@
+# python modules
+import subprocess
 import curses
+
+# local modules
 import traverse as tr
-import admin as ad
+# import verify_admin
 
 # Defining an curses object
 screen = curses.initscr()
@@ -22,7 +26,7 @@ user_menu = ("Traverse the database".ljust(50), "EXIT".ljust(50))
 # menu 1
 menu1_list = tr.display_all("module_list")
 menu1_list.append("EXIT")
-menu1 = [i.ljust(30) for i in menu1_list]
+menu1 = [i.ljust(20) for i in menu1_list]
 
 
 # Creating 3 different windows
@@ -31,6 +35,7 @@ win2=curses.newwin(h-2,3*w//9,1,2*w//9+1)
 win3=curses.newwin(h-2,4*w//9,1,5*w//9+2)
 
 
+verified=False
 
 
 def print_menu_center(menu, selected_row_index):
@@ -78,16 +83,15 @@ def admin_tui():
             current_row -= 1
         elif(key == curses.KEY_DOWN and current_row < len(admin_menu)-1):
             current_row += 1
-        elif(key == curses.KEY_ENTER or key in (10, 13) and current_row == 0):
-            screen.clear()
-            screen.refresh()
-            ad.add_admin()
-        elif(key == curses.KEY_ENTER or key in (10, 13) and current_row == 1):
-            ad.remove_admin()
-        elif(key == curses.KEY_ENTER or key in (10, 13) and current_row == 2):
-            pass
         elif(key == curses.KEY_ENTER or key in (10, 13) and current_row == len(admin_menu)-1):
             break
+        elif(key == curses.KEY_ENTER or key in (10, 13) and current_row == 0):
+            subprocess.run(['alacritty','-e','python3','add_admin.py'])
+        elif(key == curses.KEY_ENTER or key in (10, 13) and current_row == 1):
+            subprocess.run(['alacritty','-e','python3','remove_admin.py'])
+        elif(key == curses.KEY_ENTER or key in (10, 13) and current_row == 2):
+            screen.clear()
+            traverse_menu1()
         elif(key == curses.KEY_BACKSPACE):
             break
         print_menu_center(admin_menu, current_row)
@@ -186,7 +190,11 @@ def main(screen):
         elif(key == curses.KEY_DOWN and current_row < len(privilege_menu)-1):
             current_row += 1
         elif(key == curses.KEY_ENTER or key in (10, 13) and current_row == 0):
-            admin_tui()
+            subprocess.run(['alacritty','-e','python3','verify_admin.py'])
+            if pass:
+                admin_tui()
+            else:
+                continue
         elif(key == curses.KEY_ENTER or key in (10, 13) and current_row == 1):
             user_tui()
         elif(key == curses.KEY_ENTER or key in (10, 13) and current_row == 2):
@@ -194,5 +202,5 @@ def main(screen):
         elif(key == curses.KEY_BACKSPACE):
             break
 
-
-curses.wrapper(main)
+if __name__=='__main__':
+    curses.wrapper(main)
