@@ -1,6 +1,7 @@
 # python modules
 import subprocess
 import curses
+# from verify_admin import verified
 
 # local modules
 import traverse as tr
@@ -26,13 +27,12 @@ user_menu = ("Traverse the database".ljust(50), "EXIT".ljust(50))
 # menu 1
 menu1_list = tr.display_all("module_list")
 menu1_list.append("EXIT")
-menu1 = [i.ljust(20) for i in menu1_list]
+menu1 = [i.ljust(30) for i in menu1_list]
 
 
-# Creating 3 different windows
+# Creating 2 different windows
 win1=curses.newwin(h-2,2*w//9,1,1)
-win2=curses.newwin(h-2,3*w//9,1,2*w//9+1)
-win3=curses.newwin(h-2,4*w//9,1,5*w//9+2)
+win2=curses.newwin(h-2,7*w//9,1,2*w//9+1)
 
 
 verified=False
@@ -90,7 +90,6 @@ def admin_tui():
         elif(key == curses.KEY_ENTER or key in (10, 13) and current_row == 1):
             subprocess.run(['alacritty','-e','python3','remove_admin.py'])
         elif(key == curses.KEY_ENTER or key in (10, 13) and current_row == 2):
-            screen.clear()
             traverse_menu1()
         elif(key == curses.KEY_BACKSPACE):
             break
@@ -118,21 +117,17 @@ def user_tui():
 def traverse_menu1():
     menu1_current_row = 0
     while True:
-        print_data_menu(win1,menu1, menu1_current_row)
+        print_menu_center(menu1, menu1_current_row)
         menu1_key = screen.getch()
         if(menu1_key == curses.KEY_UP and menu1_current_row > 0):
             menu1_current_row -= 1
-            traverse_menu2(menu1[menu1_current_row])
         elif(menu1_key == curses.KEY_DOWN and menu1_current_row < len(menu1)-1):
             menu1_current_row += 1
-            traverse_menu2(menu1[menu1_current_row])
         elif(menu1_key == curses.KEY_ENTER or menu1_key in (10, 13) and menu1_current_row == len(menu1)-1):
             break
         elif(menu1_key == curses.KEY_ENTER or menu1_key in (10, 13)):
-            # win3.addstr(2,0, tr.get_by_name(menu1[menu1_current_row].strip(),table="module_list"))
-            # traverse_menu2(menu1[menu1_current_row])
-            # win3.refresh()
-            pass
+            screen.clear()
+            traverse_menu2(menu1[menu1_current_row])
         elif(menu1_key == curses.KEY_BACKSPACE):
             break
 
@@ -142,26 +137,23 @@ def traverse_menu2(table_name):
     menu2_list = tr.display_all(table_name)
     menu2_list.append("EXIT")
     menu2 = [i.ljust(30) for i in menu2_list]
-    print_data_menu(win2,menu2[:20],menu2_current_row)
+    print_data_menu(win1,menu2,menu2_current_row)
     while True:
-        print_data_menu(win2,menu2[:20], menu2_current_row)
+        print_data_menu(win1,menu2, menu2_current_row)
         menu2_key = screen.getch()
         if(menu2_key == curses.KEY_UP and menu2_current_row > 0):
             menu2_current_row -= 1
-            win3.clear()
-            win3.addstr(0, 0, tr.get_by_name(menu2[menu2_current_row].strip(), table_name))
-            win3.refresh()
+            win2.clear()
+            win2.addstr(0, 0, tr.get_by_name(menu2[menu2_current_row].strip(), table_name))
+            win2.refresh()
         elif(menu2_key == curses.KEY_DOWN and menu2_current_row < len(menu2)-1):
             menu2_current_row += 1
-            win3.clear()
-            win3.addstr(0, 0, tr.get_by_name(menu2[menu2_current_row].strip(), table_name))
-            win3.refresh()
+            win2.clear()
+            win2.addstr(0, 0, tr.get_by_name(menu2[menu2_current_row].strip(), table_name))
+            win2.refresh()
         elif(menu2_key == curses.KEY_ENTER or menu2_key in (10, 13) and menu2_current_row == len(menu2)-1):
             break
         elif(menu2_key == curses.KEY_ENTER or menu2_key in (10, 13)):
-            # win3.clear()
-            # win3.addstr(0, 0, tr.get_by_name(menu2[menu2_current_row].strip(), table_name))
-            # win3.refresh()
             pass
         elif(menu2_key == curses.KEY_BACKSPACE):
             break
@@ -190,8 +182,8 @@ def main(screen):
         elif(key == curses.KEY_DOWN and current_row < len(privilege_menu)-1):
             current_row += 1
         elif(key == curses.KEY_ENTER or key in (10, 13) and current_row == 0):
-            subprocess.run(['alacritty','-e','python3','verify_admin.py'])
-            if pass:
+            subprocess.run(['alacritty','-e','python3','-c','import verify_admin;verified=verify_admin.verify_admin();if(not verified: print("wrong"))'])
+            if True:
                 admin_tui()
             else:
                 continue
