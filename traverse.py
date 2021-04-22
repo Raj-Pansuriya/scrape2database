@@ -2,7 +2,7 @@ import sqlite3
 import textwrap
 
 
-conn=sqlite3.connect("test.db")
+conn=sqlite3.connect("python_doc.db")
 c=(conn).cursor()
 
 def display_all(table):
