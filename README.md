@@ -14,7 +14,7 @@
 
 - curses
 
-    It is a python library used to create interactive and rich looking Terminal User Interface (TUI).
+    It is a python library used to create interactive and rich looking Terminal User Interface (TUI). Comes preinstalled a standard library.
 
 - sqlite browser (optional)
     
@@ -33,6 +33,11 @@
 ```
 pip install pandas 
 ```
+- Alacritty (A cross platform terminal emulator)
+
+    While this should not be a dependancy to run the app and the app should run just fine on any terminal emulator, I have used alacritty to perform some admin functions such as `add_admin.py`, `remove_admin.py` and `verify_admin.py` and it won't work if the alcritty is not installed.
+    
+    I was not able to find any generic solution for running those functions such that, the script will automatically prompt for the default terminal emulator present on the machine, and need not to be dependant on `Alacritty` explicitly, but as soon as I get this issue resolved, I will update the scripts accordingly
 
 - BeautifulSoup
 
