@@ -24,7 +24,7 @@ def display_all(table):
         except:
             pass
 
-def get_by_name(name,table):
+def get_by_name(name,table,horizontal_length):
     if(table=="module_list"):
         c.execute(
             """
@@ -39,6 +39,6 @@ def get_by_name(name,table):
                 SELECT function_usage FROM {table} WHERE function_name =:function_name
                 """,{'function_name':name}
             )
-            return textwrap.fill(c.fetchall()[0][0],70)
+            return textwrap.fill(c.fetchall()[0][0],horizontal_length)
         except:
             return "No such function found in the database"

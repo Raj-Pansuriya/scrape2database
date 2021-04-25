@@ -134,7 +134,7 @@ def traverse_menu1():
 
 def traverse_menu2(table_name):
     menu2_current_row = 0
-    menu2_list = tr.display_all(table_name)
+    menu2_list = tr.display_all(table_name)[:h-3]
     menu2_list.append("EXIT")
     menu2 = [i.ljust(30) for i in menu2_list]
     print_data_menu(win1,menu2,menu2_current_row)
@@ -144,12 +144,12 @@ def traverse_menu2(table_name):
         if(menu2_key == curses.KEY_UP and menu2_current_row > 0):
             menu2_current_row -= 1
             win2.clear()
-            win2.addstr(0, 0, tr.get_by_name(menu2[menu2_current_row].strip(), table_name))
+            win2.addstr(0, 0, tr.get_by_name(menu2[menu2_current_row].strip(), table_name,7*w//9))
             win2.refresh()
         elif(menu2_key == curses.KEY_DOWN and menu2_current_row < len(menu2)-1):
             menu2_current_row += 1
             win2.clear()
-            win2.addstr(0, 0, tr.get_by_name(menu2[menu2_current_row].strip(), table_name))
+            win2.addstr(0, 0, tr.get_by_name(menu2[menu2_current_row].strip(), table_name,7*w//9))
             win2.refresh()
         elif(menu2_key == curses.KEY_ENTER or menu2_key in (10, 13) and menu2_current_row == len(menu2)-1):
             break
