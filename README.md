@@ -102,6 +102,9 @@ once you do that, run `tui.py`.
 
 If you want to enjoy the admin privilege functions there are few credentials already present in the `admin.db` database, out of which, you can use `user=user` and `password=password` to get the admin privilages. Once you get that power, you can add your name and password and then you can login using those credentials.
 
+## Key bindings
+- `Enter` or `Return` to get into a menu
+- `Backspace` to go to previous menu
 # Note
 
-The app has some linux specifc and environment specific dependancies so this will not work on a windows machine...(at least for now)
+The app has some linux specifc and environment specific dependancies so this will mot work on a windows machine...(at least for now)
