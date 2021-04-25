@@ -104,4 +104,4 @@ If you want to enjoy the admin privilege functions there are few credentials alr
 
 # Note
 
-The app has some linux specifc and environment specific dependancies so this will mot work on a windows machine...(at least for now)
+The app has some linux specifc and environment specific dependancies so this will not work on a windows machine...(at least for now)
