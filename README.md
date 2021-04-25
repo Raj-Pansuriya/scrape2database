@@ -107,4 +107,4 @@ If you want to enjoy the admin privilege functions there are few credentials alr
 - `Backspace` to go to previous menu
 # Note
 
-The app has some linux specifc and environment specific dependancies so this will mot work on a windows machine...(at least for now)
+The app has some linux specifc and environment specific dependancies so some of the functions may not work as expected on a windows machine.....(at least for now)
