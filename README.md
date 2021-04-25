@@ -70,3 +70,38 @@ for url in urls:
 pip install lxml
 ```
 
+## Code structure
+
+There are total 5 python scripts and 1 python notebook.
+
+1. The python notebook by name `scraper.ipynb` contains the code to scrape official python documentation. Once you run all the cells of this notebook you will get a database in your current working directory by name `python_doc.db`
+
+2. `tui.py` is the frontend code for our desktop app. Python `curses` module is used to design our terminal frontend
+
+3. `traverse.py` contains the code to connect our backend with our frontend. It contains functions which returns data corresponding to the parameters they get.
+
+4. There are three files related to admin functionalities namely add an admin,remove an admin and verify a user as admin as `add_admin.py`, `remove_admin.py` and `verify_admin.py` respectively.
+
+
+## Installation
+There is no need of installation for this app, simply clone the repository and you are good to go.
+
+clone the repository
+```
+git clone https://github.com/Raj-Pansuriya/scrape2database.git
+```
+
+change your `pwd` to the  cloned repo.
+```
+cd scrape2database
+```
+
+to run the program, you will first have to run each and every cell of `scraper.ipynb` so that you have a `python_doc.db` ready to be traversed.
+
+once you do that, run `tui.py`.
+
+If you want to enjoy the admin privilege functions there are few credentials already present in the `admin.db` database, out of which, you can use `user=user` and `password=password` to get the admin privilages. Once you get that power, you can add your name and password and then you can login using those credentials.
+
+# Note
+
+The app has some linux specifc and environment specific dependancies so this will mot work on a windows machine...(at least for now)
