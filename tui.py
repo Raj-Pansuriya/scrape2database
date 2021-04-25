@@ -182,7 +182,7 @@ def main(screen):
         elif(key == curses.KEY_DOWN and current_row < len(privilege_menu)-1):
             current_row += 1
         elif(key == curses.KEY_ENTER or key in (10, 13) and current_row == 0):
-            subprocess.run(['alacritty','-e','python3','-c','import verify_admin;verified=verify_admin.verify_admin();if(not verified: print("wrong"))'])
+            subprocess.run(['alacritty','-e','python3','verify_admin.py'])
             if True:
                 admin_tui()
             else:
