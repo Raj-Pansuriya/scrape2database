@@ -5,7 +5,7 @@ import time
 conn=sqlite3.connect("admin.db")
 c=conn.cursor()
 
-global verified
+# global verified
 def verify_admin():
     username=input("Enter your username: ")
     password=input("Enter your password: ")
@@ -23,6 +23,6 @@ def verify_admin():
             time.sleep(2)
             return False
 
-# if __name__=="__main__":
-#     verified=verify_admin()
-#     time.sleep(2)
+if __name__=="__main__":
+    verified=verify_admin()
+    time.sleep(2)
